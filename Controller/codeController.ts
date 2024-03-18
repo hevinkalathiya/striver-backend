@@ -1,22 +1,15 @@
-const express = require("express");
-const { PrismaClient } = require("@prisma/client");
-const cors = require("cors");
+// src/controllers/codeController.ts
+import { Request, Response } from "express";
+import prisma from "../Model/prisma";
 
-const prisma = new PrismaClient();
-const app = express();
-
-require("dotenv").config();
-
-const PORT = process.env.PORT || 3000;
-
-app.use(express.json());
-app.use(cors());
-
-// POST endpoint to accept fields like username and code
-app.post("/api/code", async (req, res) => {
+export const createCode = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { username, code, codeLanguage, std } = req.body;
   if (!username || !code || !codeLanguage || !std) {
-    return res.status(400).json({ error: "Invalid input" });
+    res.status(400).json({ error: "Invalid input" });
+    return;
   }
   try {
     const user = await prisma.user.create({
@@ -32,10 +25,9 @@ app.post("/api/code", async (req, res) => {
     console.error("Error saving user:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
-// GET endpoint to retrieve all users
-app.get("/api/code", async (req, res) => {
+export const getCode = async (_req: Request, res: Response): Promise<void> => {
   try {
     const users = await prisma.user.findMany();
     res.status(200).json(users);
@@ -43,8 +35,4 @@ app.get("/api/code", async (req, res) => {
     console.error("Error retrieving users:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+};
