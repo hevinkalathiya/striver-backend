@@ -29,7 +29,11 @@ export const createCode = async (
 
 export const getCode = async (_req: Request, res: Response): Promise<void> => {
   try {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     res.status(200).json(users);
   } catch (error) {
     console.error("Error retrieving users:", error);

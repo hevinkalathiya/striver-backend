@@ -13,4 +13,5 @@ model User {
   codeLanguage String
   code         String
   std          String
+  createdAt    DateTime @default(now())
 }
