@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 const allowedOrigins: string[] = [
-  "http://localhost:3000",
+  "http://localhost:5173",
   "https://striver-hire-me.vercel.app",
 ];
 const corsOptions: cors.CorsOptions = {
