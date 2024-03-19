@@ -1,13 +1,12 @@
-// src/controllers/codeController.ts
 import { Request, Response } from "express";
-import prisma from "../Model/prisma";
+import prisma from "../utils/prisma";
 
 export const createCode = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   const { username, code, codeLanguage, std } = req.body;
-  if (!username || !code || !codeLanguage || !std) {
+  if (!username || !code || !codeLanguage) {
     res.status(400).json({ error: "Invalid input" });
     return;
   }

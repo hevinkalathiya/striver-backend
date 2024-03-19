@@ -12,6 +12,6 @@ model User {
   username     String
   codeLanguage String
   code         String
-  std          String
+  std          String?
   createdAt    DateTime @default(now())
 }

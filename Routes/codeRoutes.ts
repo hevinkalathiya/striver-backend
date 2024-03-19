@@ -1,4 +1,3 @@
-// src/routes/codeRoutes.ts
 import express from 'express';
 import { createCode, getCode } from '../Controller/codeController';
 
